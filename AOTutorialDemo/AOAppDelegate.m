@@ -18,9 +18,9 @@
     AOTutorialController *vc = [[AOTutorialController alloc] initWithBackgroundImages:[[NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Config.plist"]] valueForKeyPath:@"Tutorial.Images"]
                                                                       andInformations:[[NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Config.plist"]] valueForKeyPath:@"Tutorial.Labels"]];
     
-    [vc setButtons:AOTutorialButtonSignup | AOTutorialButtonLogin];
+    //[vc setButtons:AOTutorialButtonSignup | AOTutorialButtonLogin];
     [vc setHeaderImage:[UIImage imageNamed:@"OSI-logo.png"]];
-    
+
     [self.window setRootViewController:vc];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
