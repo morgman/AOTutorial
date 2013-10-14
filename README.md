@@ -4,15 +4,7 @@ AOTutorial is under MIT Licence so if you find it helpful just use it !
 
 ###**AOTutorialDemo**
 
-This project help create clean application home view controller with block based animation for background images. You can also choose between NSBundle images or distant images with placeholder while image being downloaded.
-
-The AOMedallionView inherit from AGMedallionView library to add user interaction and delegate method.
-
-https://github.com/arturgrigor/AGMedallionView
-
-Distant background images is using the EGOImageLoader library.
-
-https://github.com/enormego/EGOImageLoading
+This project help create an application tutorial to show users the application's guidelines. The fade in / fade out effect animation applied to the background image is based on scrollview content offset.
 
 ###**Screenshot:**
 AOTutorialDemo in the iphone simulator
@@ -40,6 +32,34 @@ Sample project show a simple usage.
  */
 
 - (instancetype)initWithBackgroundImages:(NSArray *)images andInformations:(NSArray *)informations;
+
+/**
+ * Define a header image
+ *
+ * @param UIImage image used for header
+ */
+
+- (void)setHeaderImage:(UIImage *)logo;
+
+/**
+ * Callback for Signup button being touched up
+ */
+
+- (IBAction)signup:(id)sender;
+
+/**
+ * Callback for Login button being touched up
+ */
+
+
+- (IBAction)login:(id)sender;
+
+/**
+ * Callback for Dismiss button being touched up
+ */
+
+
+- (IBAction)dismiss:(id)sender;
 
 ```
 

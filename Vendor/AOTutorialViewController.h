@@ -18,9 +18,7 @@ typedef NSUInteger AOTutorialButton;
 @interface AOTutorialViewController : UIViewController
 
 @property (assign, nonatomic) AOTutorialButton buttons;
-
-@property (weak, nonatomic) IBOutlet UIImageView *logo;
-
+@property (retain, nonatomic) UIImage *header;
 /**
  * Custom init method to create a new AOTutorialController object
  *
@@ -40,8 +38,24 @@ typedef NSUInteger AOTutorialButton;
 
 - (void)setHeaderImage:(UIImage *)logo;
 
+/**
+ * Callback for Signup button being touched up
+ */
+
 - (IBAction)signup:(id)sender;
+
+/**
+ * Callback for Login button being touched up
+ */
+
+
 - (IBAction)login:(id)sender;
+
+/**
+ * Callback for Dismiss button being touched up
+ */
+
+
 - (IBAction)dismiss:(id)sender;
 
 @end

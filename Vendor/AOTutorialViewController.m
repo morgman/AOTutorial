@@ -107,6 +107,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
+
 @property (weak, nonatomic) IBOutlet AOButton *signupButton;
 @property (weak, nonatomic) IBOutlet AOButton *loginButton;
 @property (weak, nonatomic) IBOutlet AOButton *dismissButton;
@@ -160,6 +162,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (self.header)
+    {
+        [self.logo setHidden:NO];
+        [self.logo setImage:self.header];
+    }
     
     [self.pageController setNumberOfPages:[self.backgroundImages count]];
     [self.scrollview setContentSize:CGSizeMake(self.scrollview.frame.size.width * [self.backgroundImages count], self.scrollview.frame.size.height)];
@@ -253,8 +261,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 
 - (void)setHeaderImage:(UIImage *)logo
 {
-    [self.logo setImage:logo];
-    [self.logo setHidden:NO];
+    [self setHeader:logo];
 }
 
 #pragma mark - Labels methods

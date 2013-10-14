@@ -18,31 +18,31 @@
 				<key>Header</key>
 				<string></string>
 				<key>Label</key>
-				<string>Partage ta vie et discute en privé avec ta famille et tes amis</string>
+				<string>Tell users your application purpose</string>
 			</dict>
 			<dict>
 				<key>Header</key>
-				<string>Messagerie privée</string>
+				<string>Killer feature</string>
 				<key>Label</key>
-				<string>Communique gratuitement en privé, en tête-à-tête ou en groupe.</string>
+				<string>This application provide you a feature no other give you</string>
 			</dict>
 			<dict>
 				<key>Header</key>
-				<string>Partage ta vie</string>
+				<string>Credit author</string>
 				<key>Label</key>
-				<string>Capture et partage les événements de la vie de tous les jours - en photos, en pensées et bien plus.</string>
+				<string>You can always credit author if you use an open source component.</string>
 			</dict>
 			<dict>
 				<key>Header</key>
-				<string>Revisite des moments précis</string>
+				<string>Feedback</string>
 				<key>Label</key>
-				<string>Recherche instantanément des souvenirs d&apos;amis, de saisons, d&apos;anniversaire et bien plus.</string>
+				<string>It&apos;s always a good thing to give some feedback about a control. Author will be happy to hear from you.</string>
 			</dict>
 			<dict>
 				<key>Header</key>
-				<string>Tout-en-un</string>
+				<string>Get in touch</string>
 				<key>Label</key>
-				<string>Choisis les événements Baby Planner que tu souhaites publier sur d&apos;autres réseaux sociaux.</string>
+				<string>If you want to get in touch, feel free to send an email to contact@appsido.com</string>
 			</dict>
 		</array>
 	</dict>

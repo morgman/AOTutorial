@@ -35,6 +35,8 @@
 		F337C491180C17CF002BA770 /* bg_5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F337C483180C17CF002BA770 /* bg_5@2x.jpg */; };
 		F337C492180C17CF002BA770 /* AOTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F337C486180C17CF002BA770 /* AOTutorialViewController.m */; };
 		F337C493180C17CF002BA770 /* AOTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F337C487180C17CF002BA770 /* AOTutorialViewController.xib */; };
+		F337C499180C2477002BA770 /* OSI-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F337C498180C2477002BA770 /* OSI-logo.png */; };
+		F337C49B180C2502002BA770 /* OSI-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F337C49A180C2502002BA770 /* OSI-logo@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		F337C485180C17CF002BA770 /* AOTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTutorialViewController.h; sourceTree = "<group>"; };
 		F337C486180C17CF002BA770 /* AOTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOTutorialViewController.m; sourceTree = "<group>"; };
 		F337C487180C17CF002BA770 /* AOTutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AOTutorialViewController.xib; sourceTree = "<group>"; };
+		F337C498180C2477002BA770 /* OSI-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OSI-logo.png"; sourceTree = "<group>"; };
+		F337C49A180C2502002BA770 /* OSI-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OSI-logo@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +192,8 @@
 		F337C479180C17CF002BA770 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F337C498180C2477002BA770 /* OSI-logo.png */,
+				F337C49A180C2502002BA770 /* OSI-logo@2x.png */,
 				F337C47A180C17CF002BA770 /* bg_1.jpg */,
 				F337C47B180C17CF002BA770 /* bg_1@2x.jpg */,
 				F337C47C180C17CF002BA770 /* bg_2.jpg */,
@@ -294,12 +300,14 @@
 				F337C490180C17CF002BA770 /* bg_5.jpg in Resources */,
 				F337C48D180C17CF002BA770 /* bg_3@2x.jpg in Resources */,
 				F337C44C180C1731002BA770 /* InfoPlist.strings in Resources */,
+				F337C499180C2477002BA770 /* OSI-logo.png in Resources */,
 				F337C48A180C17CF002BA770 /* bg_2.jpg in Resources */,
 				F337C48B180C17CF002BA770 /* bg_2@2x.jpg in Resources */,
 				F337C474180C17C0002BA770 /* Config.plist in Resources */,
 				F337C48F180C17CF002BA770 /* bg_4@2x.jpg in Resources */,
 				F337C478180C17C6002BA770 /* README.md in Resources */,
 				F337C477180C17C6002BA770 /* LICENSE in Resources */,
+				F337C49B180C2502002BA770 /* OSI-logo@2x.png in Resources */,
 				F337C48E180C17CF002BA770 /* bg_4.jpg in Resources */,
 				F337C48C180C17CF002BA770 /* bg_3.jpg in Resources */,
 				F337C491180C17CF002BA770 /* bg_5@2x.jpg in Resources */,
