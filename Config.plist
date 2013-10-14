@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Tutorial</key>
+	<dict>
+		<key>Images</key>
+		<array>
+			<string>bg_1.jpg</string>
+			<string>bg_2.jpg</string>
+			<string>bg_3.jpg</string>
+			<string>bg_4.jpg</string>
+			<string>bg_5.jpg</string>
+		</array>
+		<key>Labels</key>
+		<array>
+			<dict>
+				<key>Header</key>
+				<string></string>
+				<key>Label</key>
+				<string>Partage ta vie et discute en privé avec ta famille et tes amis</string>
+			</dict>
+			<dict>
+				<key>Header</key>
+				<string>Messagerie privée</string>
+				<key>Label</key>
+				<string>Communique gratuitement en privé, en tête-à-tête ou en groupe.</string>
+			</dict>
+			<dict>
+				<key>Header</key>
+				<string>Partage ta vie</string>
+				<key>Label</key>
+				<string>Capture et partage les événements de la vie de tous les jours - en photos, en pensées et bien plus.</string>
+			</dict>
+			<dict>
+				<key>Header</key>
+				<string>Revisite des moments précis</string>
+				<key>Label</key>
+				<string>Recherche instantanément des souvenirs d&apos;amis, de saisons, d&apos;anniversaire et bien plus.</string>
+			</dict>
+			<dict>
+				<key>Header</key>
+				<string>Tout-en-un</string>
+				<key>Label</key>
+				<string>Choisis les événements Baby Planner que tu souhaites publier sur d&apos;autres réseaux sociaux.</string>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>
