@@ -35,6 +35,7 @@
 		F337C491180C17CF002BA770 /* bg_5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F337C483180C17CF002BA770 /* bg_5@2x.jpg */; };
 		F337C499180C2477002BA770 /* OSI-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F337C498180C2477002BA770 /* OSI-logo.png */; };
 		F337C49B180C2502002BA770 /* OSI-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F337C49A180C2502002BA770 /* OSI-logo@2x.png */; };
+		F39FE5F0181FC377002FBF8A /* AOTutorial.podspec in Resources */ = {isa = PBXBuildFile; fileRef = F39FE5EF181FC377002FBF8A /* AOTutorial.podspec */; };
 		F3A647D4180C53C700AAF798 /* AOTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A647D2180C53C700AAF798 /* AOTutorialViewController.m */; };
 		F3A647D5180C53C700AAF798 /* AOTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A647D3180C53C700AAF798 /* AOTutorialViewController.xib */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		F337C483180C17CF002BA770 /* bg_5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bg_5@2x.jpg"; sourceTree = "<group>"; };
 		F337C498180C2477002BA770 /* OSI-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OSI-logo.png"; sourceTree = "<group>"; };
 		F337C49A180C2502002BA770 /* OSI-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OSI-logo@2x.png"; sourceTree = "<group>"; };
+		F39FE5EF181FC377002FBF8A /* AOTutorial.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AOTutorial.podspec; sourceTree = "<group>"; };
 		F3A647D1180C53C700AAF798 /* AOTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AOTutorialViewController.h; path = src/AOTutorialViewController.h; sourceTree = SOURCE_ROOT; };
 		F3A647D2180C53C700AAF798 /* AOTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AOTutorialViewController.m; path = src/AOTutorialViewController.m; sourceTree = SOURCE_ROOT; };
 		F3A647D3180C53C700AAF798 /* AOTutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AOTutorialViewController.xib; path = src/AOTutorialViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -115,6 +117,7 @@
 		F337C435180C1731002BA770 = {
 			isa = PBXGroup;
 			children = (
+				F39FE5EF181FC377002FBF8A /* AOTutorial.podspec */,
 				F337C475180C17C6002BA770 /* LICENSE */,
 				F337C476180C17C6002BA770 /* README.md */,
 				F337C473180C17C0002BA770 /* Config.plist */,
@@ -298,6 +301,7 @@
 			files = (
 				F337C490180C17CF002BA770 /* bg_5.jpg in Resources */,
 				F337C48D180C17CF002BA770 /* bg_3@2x.jpg in Resources */,
+				F39FE5F0181FC377002FBF8A /* AOTutorial.podspec in Resources */,
 				F337C44C180C1731002BA770 /* InfoPlist.strings in Resources */,
 				F337C499180C2477002BA770 /* OSI-logo.png in Resources */,
 				F3A647D5180C53C700AAF798 /* AOTutorialViewController.xib in Resources */,
