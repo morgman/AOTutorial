@@ -221,10 +221,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     NSUInteger index = 0;
     for (NSDictionary *labels in self.informationLabels)
     {
-        CGSize hSize = ACMStringSize([labels valueForKey:@"Header"], CGSizeMake((self.view.frame.size.width - (headerLeftMargin * 2)), 60.0f), [self headerTextStyleAttributes]);
-        CGSize lSize = ACMStringSize([labels valueForKey:@"Label"], CGSizeMake((self.view.frame.size.width - (labelLeftMargin * 2)), 60.0f), [self labelTextStyleAttributes]);
+        CGSize hSize = ACMStringSize([labels valueForKey:@"Header"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), 60.0f), [self headerTextStyleAttributes]);
+        CGSize lSize = ACMStringSize([labels valueForKey:@"Label"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), 60.0f), [self labelTextStyleAttributes]);
         
-        UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (self.view.frame.size.width * index) + headerLeftMargin, self.view.frame.size.height - 120.0f - lSize.height, (self.view.frame.size.width - (headerLeftMargin * 2)), hSize.height + 5.0f)];
+        NSLog(@"Frame > %@", NSStringFromCGRect(self.scrollview.frame));
+        
+        UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + ([[UIScreen mainScreen] bounds].size.width * index) + headerLeftMargin, [[UIScreen mainScreen] bounds].size.height - 120.0f - lSize.height, ([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), hSize.height + 5.0f)];
         [header setNumberOfLines:1];
         [header setLineBreakMode:NSLineBreakByTruncatingTail];
         [header setShadowOffset:CGSizeMake(1, 1)];
@@ -236,7 +238,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         [header setFont:[UIFont fontWithName:headerFontType size:headerFontSize]];
         [self.scrollview addSubview:header];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (self.view.frame.size.width * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, (self.view.frame.size.width - (labelLeftMargin * 2)), lSize.height)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + ([[UIScreen mainScreen] bounds].size.width * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, ([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), lSize.height)];
         [label setNumberOfLines:0];
         [label setLineBreakMode:NSLineBreakByWordWrapping];
         [label setShadowOffset:CGSizeMake(1, 1)];
@@ -317,7 +319,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat alpha = [scrollView contentOffset].x / [self.view frame].size.width - _index;
+    CGFloat alpha = [scrollView contentOffset].x / [[UIScreen mainScreen] bounds].size.width - _index;
     
     NSInteger newIndex = (alpha < 0 ? _index-1 : _index+1);
     
