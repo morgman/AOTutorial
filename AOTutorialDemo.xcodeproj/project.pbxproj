@@ -14,11 +14,6 @@
 		F337C44E180C1731002BA770 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F337C44D180C1731002BA770 /* main.m */; };
 		F337C452180C1731002BA770 /* AOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F337C451180C1731002BA770 /* AOAppDelegate.m */; };
 		F337C454180C1731002BA770 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F337C453180C1731002BA770 /* Images.xcassets */; };
-		F337C45B180C1731002BA770 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F337C45A180C1731002BA770 /* XCTest.framework */; };
-		F337C45C180C1731002BA770 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F337C441180C1731002BA770 /* Foundation.framework */; };
-		F337C45D180C1731002BA770 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F337C445180C1731002BA770 /* UIKit.framework */; };
-		F337C465180C1731002BA770 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F337C463180C1731002BA770 /* InfoPlist.strings */; };
-		F337C467180C1731002BA770 /* AOTutorialDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F337C466180C1731002BA770 /* AOTutorialDemoTests.m */; };
 		F337C472180C17BB002BA770 /* AOTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = F337C471180C17BB002BA770 /* AOTutorialController.m */; };
 		F337C474180C17C0002BA770 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = F337C473180C17C0002BA770 /* Config.plist */; };
 		F337C477180C17C6002BA770 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F337C475180C17C6002BA770 /* LICENSE */; };
@@ -35,38 +30,10 @@
 		F337C491180C17CF002BA770 /* bg_5@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F337C483180C17CF002BA770 /* bg_5@2x.jpg */; };
 		F337C499180C2477002BA770 /* OSI-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F337C498180C2477002BA770 /* OSI-logo.png */; };
 		F337C49B180C2502002BA770 /* OSI-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F337C49A180C2502002BA770 /* OSI-logo@2x.png */; };
-		F34D9732184CDAB5003E255E /* AOTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F34D9731184CDAB5003E255E /* AOTutorialViewController.m */; };
-		F34D9734184CDAC0003E255E /* AOTutorialViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F34D9733184CDAC0003E255E /* AOTutorialViewController.h */; };
 		F39FE5F0181FC377002FBF8A /* AOTutorial.podspec in Resources */ = {isa = PBXBuildFile; fileRef = F39FE5EF181FC377002FBF8A /* AOTutorial.podspec */; };
-		F3B407F1184CD8710013C30A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F337C441180C1731002BA770 /* Foundation.framework */; };
-		F3B407F6184CD8710013C30A /* AOTutorialLib.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3B407F5184CD8710013C30A /* AOTutorialLib.h */; };
 		F3B4081A184CD9F10013C30A /* libAOTutorialLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B40817184CD9F10013C30A /* libAOTutorialLib.a */; };
 		F3B4081B184CD9F10013C30A /* AOTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B40819184CD9F10013C30A /* AOTutorialViewController.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		F337C45E180C1731002BA770 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F337C436180C1731002BA770 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F337C43D180C1731002BA770;
-			remoteInfo = AOTutorialDemo;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		F3B407EE184CD8710013C30A /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				F3B407F6184CD8710013C30A /* AOTutorialLib.h in CopyFiles */,
-				F34D9734184CDAC0003E255E /* AOTutorialViewController.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F337C43E180C1731002BA770 /* AOTutorialDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AOTutorialDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,11 +47,7 @@
 		F337C450180C1731002BA770 /* AOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AOAppDelegate.h; sourceTree = "<group>"; };
 		F337C451180C1731002BA770 /* AOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AOAppDelegate.m; sourceTree = "<group>"; };
 		F337C453180C1731002BA770 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F337C459180C1731002BA770 /* AOTutorialDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AOTutorialDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F337C45A180C1731002BA770 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		F337C462180C1731002BA770 /* AOTutorialDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AOTutorialDemoTests-Info.plist"; sourceTree = "<group>"; };
-		F337C464180C1731002BA770 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F337C466180C1731002BA770 /* AOTutorialDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AOTutorialDemoTests.m; sourceTree = "<group>"; };
 		F337C470180C17BB002BA770 /* AOTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTutorialController.h; sourceTree = SOURCE_ROOT; };
 		F337C471180C17BB002BA770 /* AOTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOTutorialController.m; sourceTree = SOURCE_ROOT; };
 		F337C473180C17C0002BA770 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -102,13 +65,8 @@
 		F337C483180C17CF002BA770 /* bg_5@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bg_5@2x.jpg"; sourceTree = "<group>"; };
 		F337C498180C2477002BA770 /* OSI-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OSI-logo.png"; sourceTree = "<group>"; };
 		F337C49A180C2502002BA770 /* OSI-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OSI-logo@2x.png"; sourceTree = "<group>"; };
-		F34D9731184CDAB5003E255E /* AOTutorialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AOTutorialViewController.m; path = src/AOTutorialViewController.m; sourceTree = "<group>"; };
-		F34D9733184CDAC0003E255E /* AOTutorialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AOTutorialViewController.h; path = src/AOTutorialViewController.h; sourceTree = "<group>"; };
 		F34D9735184CDAE5003E255E /* AOTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTutorialViewController.h; sourceTree = "<group>"; };
 		F39FE5EF181FC377002FBF8A /* AOTutorial.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AOTutorial.podspec; sourceTree = "<group>"; };
-		F3B407F0184CD8710013C30A /* libAOTutorialLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAOTutorialLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F3B407F4184CD8710013C30A /* AOTutorialLib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AOTutorialLib-Prefix.pch"; sourceTree = "<group>"; };
-		F3B407F5184CD8710013C30A /* AOTutorialLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AOTutorialLib.h; sourceTree = "<group>"; };
 		F3B40815184CD9F10013C30A /* AOTutorialLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTutorialLib.h; sourceTree = "<group>"; };
 		F3B40817184CD9F10013C30A /* libAOTutorialLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAOTutorialLib.a; sourceTree = "<group>"; };
 		F3B40819184CD9F10013C30A /* AOTutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AOTutorialViewController.xib; sourceTree = "<group>"; };
@@ -126,39 +84,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F337C456180C1731002BA770 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F337C45B180C1731002BA770 /* XCTest.framework in Frameworks */,
-				F337C45D180C1731002BA770 /* UIKit.framework in Frameworks */,
-				F337C45C180C1731002BA770 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F3B407ED184CD8710013C30A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F3B407F1184CD8710013C30A /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		F337C435180C1731002BA770 = {
 			isa = PBXGroup;
 			children = (
-				F34D9733184CDAC0003E255E /* AOTutorialViewController.h */,
-				F34D9731184CDAB5003E255E /* AOTutorialViewController.m */,
 				F39FE5EF181FC377002FBF8A /* AOTutorial.podspec */,
 				F337C475180C17C6002BA770 /* LICENSE */,
 				F337C476180C17C6002BA770 /* README.md */,
 				F337C473180C17C0002BA770 /* Config.plist */,
 				F337C447180C1731002BA770 /* AOTutorialDemo */,
-				F337C460180C1731002BA770 /* AOTutorialDemoTests */,
-				F3B407F2184CD8710013C30A /* AOTutorialLib */,
 				F337C440180C1731002BA770 /* Frameworks */,
 				F337C43F180C1731002BA770 /* Products */,
 			);
@@ -168,8 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				F337C43E180C1731002BA770 /* AOTutorialDemo.app */,
-				F337C459180C1731002BA770 /* AOTutorialDemoTests.xctest */,
-				F3B407F0184CD8710013C30A /* libAOTutorialLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,24 +145,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F337C460180C1731002BA770 /* AOTutorialDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				F337C466180C1731002BA770 /* AOTutorialDemoTests.m */,
-				F337C461180C1731002BA770 /* Supporting Files */,
-			);
-			path = AOTutorialDemoTests;
-			sourceTree = "<group>";
-		};
-		F337C461180C1731002BA770 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F337C462180C1731002BA770 /* AOTutorialDemoTests-Info.plist */,
-				F337C463180C1731002BA770 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		F337C479180C17CF002BA770 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,29 +165,11 @@
 			path = ../Images;
 			sourceTree = "<group>";
 		};
-		F3B407F2184CD8710013C30A /* AOTutorialLib */ = {
-			isa = PBXGroup;
-			children = (
-				F3B407F5184CD8710013C30A /* AOTutorialLib.h */,
-				F3B407F3184CD8710013C30A /* Supporting Files */,
-			);
-			path = AOTutorialLib;
-			sourceTree = "<group>";
-		};
-		F3B407F3184CD8710013C30A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F3B407F4184CD8710013C30A /* AOTutorialLib-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		F3B40813184CD9F10013C30A /* AOTutorialLib */ = {
 			isa = PBXGroup;
 			children = (
 				F3B40817184CD9F10013C30A /* libAOTutorialLib.a */,
 				F3B40814184CD9F10013C30A /* header */,
-				F3B40816184CD9F10013C30A /* include */,
 				F3B40818184CD9F10013C30A /* resources */,
 			);
 			name = AOTutorialLib;
@@ -285,13 +183,6 @@
 				F34D9735184CDAE5003E255E /* AOTutorialViewController.h */,
 			);
 			path = header;
-			sourceTree = "<group>";
-		};
-		F3B40816184CD9F10013C30A /* include */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 		F3B40818184CD9F10013C30A /* resources */ = {
@@ -322,41 +213,6 @@
 			productReference = F337C43E180C1731002BA770 /* AOTutorialDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F337C458180C1731002BA770 /* AOTutorialDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F337C46D180C1731002BA770 /* Build configuration list for PBXNativeTarget "AOTutorialDemoTests" */;
-			buildPhases = (
-				F337C455180C1731002BA770 /* Sources */,
-				F337C456180C1731002BA770 /* Frameworks */,
-				F337C457180C1731002BA770 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F337C45F180C1731002BA770 /* PBXTargetDependency */,
-			);
-			name = AOTutorialDemoTests;
-			productName = AOTutorialDemoTests;
-			productReference = F337C459180C1731002BA770 /* AOTutorialDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		F3B407EF184CD8710013C30A /* AOTutorialLib */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F3B40810184CD8710013C30A /* Build configuration list for PBXNativeTarget "AOTutorialLib" */;
-			buildPhases = (
-				F3B407EC184CD8710013C30A /* Sources */,
-				F3B407ED184CD8710013C30A /* Frameworks */,
-				F3B407EE184CD8710013C30A /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AOTutorialLib;
-			productName = AOTutorialLib;
-			productReference = F3B407F0184CD8710013C30A /* libAOTutorialLib.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -366,11 +222,6 @@
 				CLASSPREFIX = AO;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Appsido;
-				TargetAttributes = {
-					F337C458180C1731002BA770 = {
-						TestTargetID = F337C43D180C1731002BA770;
-					};
-				};
 			};
 			buildConfigurationList = F337C439180C1731002BA770 /* Build configuration list for PBXProject "AOTutorialDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -385,8 +236,6 @@
 			projectRoot = "";
 			targets = (
 				F337C43D180C1731002BA770 /* AOTutorialDemo */,
-				F337C458180C1731002BA770 /* AOTutorialDemoTests */,
-				F3B407EF184CD8710013C30A /* AOTutorialLib */,
 			);
 		};
 /* End PBXProject section */
@@ -418,14 +267,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F337C457180C1731002BA770 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F337C465180C1731002BA770 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -439,45 +280,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F337C455180C1731002BA770 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F337C467180C1731002BA770 /* AOTutorialDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F3B407EC184CD8710013C30A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F34D9732184CDAB5003E255E /* AOTutorialViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F337C45F180C1731002BA770 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F337C43D180C1731002BA770 /* AOTutorialDemo */;
-			targetProxy = F337C45E180C1731002BA770 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F337C44A180C1731002BA770 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F337C44B180C1731002BA770 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F337C463180C1731002BA770 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F337C464180C1731002BA770 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -591,78 +400,6 @@
 			};
 			name = Release;
 		};
-		F337C46E180C1731002BA770 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AOTutorialDemo.app/AOTutorialDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AOTutorialDemo/AOTutorialDemo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "AOTutorialDemoTests/AOTutorialDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		F337C46F180C1731002BA770 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AOTutorialDemo.app/AOTutorialDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AOTutorialDemo/AOTutorialDemo-Prefix.pch";
-				INFOPLIST_FILE = "AOTutorialDemoTests/AOTutorialDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-		F3B4080C184CD8710013C30A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				DSTROOT = /tmp/AOTutorialLib.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AOTutorialLib/AOTutorialLib-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F3B4080D184CD8710013C30A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				DSTROOT = /tmp/AOTutorialLib.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "AOTutorialLib/AOTutorialLib-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -680,24 +417,6 @@
 			buildConfigurations = (
 				F337C46B180C1731002BA770 /* Debug */,
 				F337C46C180C1731002BA770 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F337C46D180C1731002BA770 /* Build configuration list for PBXNativeTarget "AOTutorialDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F337C46E180C1731002BA770 /* Debug */,
-				F337C46F180C1731002BA770 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F3B40810184CD8710013C30A /* Build configuration list for PBXNativeTarget "AOTutorialLib" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F3B4080C184CD8710013C30A /* Debug */,
-				F3B4080D184CD8710013C30A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
