@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-#import "AOTutorialViewController.h"
+#import "AOTutorialLib.h"
 
 @interface AOTutorialController : AOTutorialViewController
 
