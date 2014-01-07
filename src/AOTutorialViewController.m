@@ -66,34 +66,6 @@
 
 @end
 
-@interface AOButton : UIButton
-
-@end
-
-@implementation AOButton
-
-- (void)drawRect:(CGRect)rect
-{
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    NSArray *gradientColors = @[(id)[[UIColor colorWithHexString:buttonColorTop] CGColor], (id)[[UIColor colorWithHexString:buttonColorBottom] CGColor]];
-    
-    CGFloat gradientLocations[] = {0, 1};
-    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
-    
-    UIBezierPath *roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:5];
-    CGContextSaveGState(context);
-    [roundedRectanglePath addClip];
-    CGContextDrawLinearGradient(context, gradient, CGPointMake(rect.size.width/2, 0), CGPointMake(rect.size.width/2, rect.size.height), 0);
-    CGContextRestoreGState(context);
-    
-    CGGradientRelease(gradient);
-    CGColorSpaceRelease(colorSpace);
-}
-
-@end
-
 @interface AOTutorialViewController ()
 {
     NSUInteger _index;
@@ -108,10 +80,6 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 
 @property (weak, nonatomic) IBOutlet UIImageView *logo;
-
-@property (weak, nonatomic) IBOutlet AOButton *signupButton;
-@property (weak, nonatomic) IBOutlet AOButton *loginButton;
-@property (weak, nonatomic) IBOutlet AOButton *dismissButton;
 
 @end
 

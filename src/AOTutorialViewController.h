@@ -17,8 +17,38 @@ typedef NSUInteger AOTutorialButton;
 
 @interface AOTutorialViewController : UIViewController
 
+/**
+ * Used to define which buttons will be shown to the user.
+ *
+ * @see AOTutorialButton enum.
+ */
+
 @property (assign, nonatomic) AOTutorialButton buttons;
+
+/**
+ * Header image. Can be used to add a logo
+ */
+
 @property (retain, nonatomic) UIImage *header;
+
+/**
+ * Signup button
+ */
+
+@property (weak, nonatomic) IBOutlet UIButton *signupButton;
+
+/**
+ * Login button
+ */
+
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+
+/**
+ * Dismiss button
+ */
+
+@property (weak, nonatomic) IBOutlet UIButton *dismissButton;
+
 /**
  * Custom init method to create a new AOTutorialController object
  *
