@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "AOTutorial"
-  s.version      = "1.2"
+  s.version      = "1.4"
   s.summary      = "A tutorial component with fade in / fade out animation for background images"
 
   s.description  = <<-DESC
@@ -20,7 +20,7 @@ Integrated with action buttons - a Dismiss button or a Signup/login button to li
   s.license      = 'MIT'
   s.author       = { "Loïc Griffié" => "lgriffie@appsido.com" }
   s.platform     = :ios, '5.0'
-  s.source       = { :git => "https://github.com/Appsido/AOTutorial.git", :tag => "1.2" }
+  s.source       = { :git => "https://github.com/Appsido/AOTutorial.git", :tag => "1.4" }
   s.source_files  = 'src'
   s.requires_arc = true
 
