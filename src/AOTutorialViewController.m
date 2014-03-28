@@ -1,6 +1,6 @@
 //
 //  AOTutorialViewController.m
-//  BabyPlanner
+//  AOTutorial
 //
 //  Created by Loïc GRIFFIE on 11/10/2013.
 //  Copyright (c) 2013 Appsido. All rights reserved.
@@ -10,6 +10,7 @@
 
 #define headerLeftMargin    20.0f
 #define headerFontSize      15.0f
+
 #define headerFontType      @"Helvetica"
 #define headerColor         [UIColor whiteColor]
 
@@ -24,6 +25,9 @@
 #define loginLabelColor     @"#000000"
 #define signupLabelColor    @"#B80000"
 #define dismissLabelColor   @"#000000"
+
+#define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 
 
 @interface UIColor (AOAdditions)
@@ -100,6 +104,14 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     return [layoutManager usedRectForTextContainer:textContainer].size;
 }
 
+#pragma mark - Load data
+- (void)loadBackgroundImages:(NSArray *)images andInformations:(NSArray *)informations
+{
+    self.backgroundImages = [NSMutableArray arrayWithArray:images];
+    self.informationLabels = [NSMutableArray arrayWithArray:informations];
+
+}
+
 #pragma mark - Life cycle methods
 
 - (instancetype)initWithBackgroundImages:(NSArray *)images andInformations:(NSArray *)informations
@@ -127,6 +139,13 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     return self;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    
+    [self.view setFrame:CGRectMake(0.0f, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT)];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -138,9 +157,9 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     }
     
     [self.pageController setNumberOfPages:[self.backgroundImages count]];
-    [self.scrollview setContentSize:CGSizeMake(self.scrollview.frame.size.width * [self.backgroundImages count], self.scrollview.frame.size.height)];
     
     [self layoutViews];
+    [self.scrollview setContentSize:CGSizeMake(SCREEN_WIDTH * [self.backgroundImages count], SCREEN_HEIGHT)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,11 +168,22 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     // Dispose of any resources that can be recreated.
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+{
+
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self defineLabelLayout];
+}
+
 - (void)addButton
 {
     [self.loginButton setTitleColor:[UIColor colorWithHexString:loginLabelColor] forState:UIControlStateNormal];
     [self.signupButton setTitleColor:[UIColor colorWithHexString:signupLabelColor] forState:UIControlStateNormal];
     [self.dismissButton setTitleColor:[UIColor colorWithHexString:dismissLabelColor] forState:UIControlStateNormal];
+    
     
     [self.dismissButton setHidden:YES];
     
@@ -192,10 +222,26 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         CGSize hSize = ACMStringSize([labels valueForKey:@"Header"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), 60.0f), [self headerTextStyleAttributes]);
         CGSize lSize = ACMStringSize([labels valueForKey:@"Label"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), 60.0f), [self labelTextStyleAttributes]);
         
-        NSLog(@"Frame > %@", NSStringFromCGRect(self.scrollview.frame));
-        
-        UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + ([[UIScreen mainScreen] bounds].size.width * index) + headerLeftMargin, [[UIScreen mainScreen] bounds].size.height - 120.0f - lSize.height, ([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), hSize.height + 5.0f)];
+        UILabel *header = nil;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            
+            header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + headerLeftMargin,
+                                                               SCREEN_HEIGHT - 120.0f - lSize.height,
+                                                               SCREEN_WIDTH - (headerLeftMargin * 2),
+                                                               hSize.height + 5.0f)];
+            
+        } else {
+            
+            header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + headerLeftMargin,
+                                                                        SCREEN_HEIGHT - 120.0f - lSize.height,
+                                                                        SCREEN_WIDTH - (headerLeftMargin * 2),
+                                                                        hSize.height + 5.0f)];
+            
+        }
+
+        [header setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
         [header setNumberOfLines:1];
+        [header setTag:index];
         [header setLineBreakMode:NSLineBreakByTruncatingTail];
         [header setShadowOffset:CGSizeMake(1, 1)];
         [header setShadowColor:[UIColor blackColor]];
@@ -206,8 +252,21 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         [header setFont:[UIFont fontWithName:headerFontType size:headerFontSize]];
         [self.scrollview addSubview:header];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + ([[UIScreen mainScreen] bounds].size.width * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, ([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), lSize.height)];
+        UILabel *label = nil;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, (SCREEN_WIDTH - (labelLeftMargin * 2)), lSize.height)];
+            
+        } else {
+            
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, (SCREEN_WIDTH - (labelLeftMargin * 2)), lSize.height)];
+            
+        }
+        
+ 
+        [label setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
         [label setNumberOfLines:0];
+        [label setTag:index];
         [label setLineBreakMode:NSLineBreakByWordWrapping];
         [label setShadowOffset:CGSizeMake(1, 1)];
         [label setShadowColor:[UIColor blackColor]];
@@ -220,6 +279,24 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         
         index++;
     }
+}
+
+- (void)defineLabelLayout
+{
+    [self.scrollview setContentSize:CGSizeMake(SCREEN_WIDTH * [self.backgroundImages count], SCREEN_HEIGHT)];
+    
+    for (UIView *v in [self.scrollview subviews])
+    {
+        if ([v isKindOfClass:[UILabel class]])
+        {
+            CGRect f = [v frame];
+            f.size.width = (SCREEN_WIDTH - (labelLeftMargin * 2));
+            f.origin.x = (SCREEN_WIDTH * [v tag]) + labelLeftMargin;
+            [v setFrame:f];
+        }
+    }
+    
+    [self.scrollview setContentOffset:CGPointMake(SCREEN_WIDTH * _index, self.scrollview.contentOffset.y)];
 }
 
 - (void)resetBackgroundImageState
@@ -287,7 +364,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat alpha = [scrollView contentOffset].x / [[UIScreen mainScreen] bounds].size.width - _index;
+    CGFloat alpha = [scrollView contentOffset].x / SCREEN_WIDTH - _index;
     
     NSInteger newIndex = (alpha < 0 ? _index-1 : _index+1);
     
