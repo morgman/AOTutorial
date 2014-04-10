@@ -1,16 +1,16 @@
 //
 //  AOTutorialViewController.m
-//  AOTutorial
+//  BabyPlanner
 //
 //  Created by Loïc GRIFFIE on 11/10/2013.
 //  Copyright (c) 2013 Appsido. All rights reserved.
 //
 
 #import "AOTutorialViewController.h"
+#import "UIColor+Additions.h"
 
 #define headerLeftMargin    20.0f
 #define headerFontSize      15.0f
-
 #define headerFontType      @"Helvetica"
 #define headerColor         [UIColor whiteColor]
 
@@ -25,9 +25,6 @@
 #define loginLabelColor     @"#000000"
 #define signupLabelColor    @"#B80000"
 #define dismissLabelColor   @"#000000"
-
-#define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
-#define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 
 
 @interface UIColor (AOAdditions)
@@ -104,14 +101,6 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     return [layoutManager usedRectForTextContainer:textContainer].size;
 }
 
-#pragma mark - Load data
-- (void)loadBackgroundImages:(NSArray *)images andInformations:(NSArray *)informations
-{
-    self.backgroundImages = [NSMutableArray arrayWithArray:images];
-    self.informationLabels = [NSMutableArray arrayWithArray:informations];
-
-}
-
 #pragma mark - Life cycle methods
 
 - (instancetype)initWithBackgroundImages:(NSArray *)images andInformations:(NSArray *)informations
@@ -119,7 +108,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     self = [self initWithNibName:@"AOTutorialViewController" bundle:nil];
     if (self)
     {
-        self.backgroundImages = [NSMutableArray arrayWithArray:images];
+        self.backgroundImages = [NSMutableArray array];
+        for (NSString *imageName in images) {
+            UIImage *anImage = [UIImage imageNamed:imageName];
+            [self.backgroundImages addObject:anImage];
+        }
+//        self.backgroundImages = [NSMutableArray arrayWithArray:images];
         self.informationLabels = [NSMutableArray arrayWithArray:informations];
     }
     return self;
@@ -139,13 +133,6 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     return self;
 }
 
-- (void)loadView
-{
-    [super loadView];
-    
-    [self.view setFrame:CGRectMake(0.0f, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT)];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -157,9 +144,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     }
     
     [self.pageController setNumberOfPages:[self.backgroundImages count]];
+    [self.scrollview setContentSize:CGSizeMake(self.scrollview.frame.size.width * [self.backgroundImages count], self.scrollview.frame.size.height)];
+    
+    [self.backDismissButton setTitle:[[self.dismissButton titleLabel] text] forState:UIControlStateNormal];
+
     
     [self layoutViews];
-    [self.scrollview setContentSize:CGSizeMake(SCREEN_WIDTH * [self.backgroundImages count], SCREEN_HEIGHT)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -168,24 +158,15 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     // Dispose of any resources that can be recreated.
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
-{
-
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self defineLabelLayout];
-}
-
 - (void)addButton
 {
     [self.loginButton setTitleColor:[UIColor colorWithHexString:loginLabelColor] forState:UIControlStateNormal];
     [self.signupButton setTitleColor:[UIColor colorWithHexString:signupLabelColor] forState:UIControlStateNormal];
     [self.dismissButton setTitleColor:[UIColor colorWithHexString:dismissLabelColor] forState:UIControlStateNormal];
     
-    
     [self.dismissButton setHidden:YES];
+    [self.backDismissButton setHidden:YES];
+    [self.backDismissButton setAlpha:0.0];
     
     switch (self.buttons) {
         case AOTutorialButtonSignup:
@@ -202,6 +183,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
             [self.signupButton setHidden:YES];
             [self.loginButton setHidden:YES];
             [self.dismissButton setHidden:NO];
+            [self.backDismissButton setHidden:NO];
     }
 }
 
@@ -211,7 +193,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     [self addInformationsLabels];
     [self resetBackgroundImageState];
     
-    [self.backgroundBottomImage setImage:[UIImage imageNamed:[self.backgroundImages objectAtIndex:_index+1]]];
+    [self.backgroundBottomImage setImage:[self.backgroundImages objectAtIndex:_index+1]];
 }
 
 - (void)addInformationsLabels
@@ -219,91 +201,48 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     NSUInteger index = 0;
     for (NSDictionary *labels in self.informationLabels)
     {
-        CGSize hSize = ACMStringSize([labels valueForKey:@"Header"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), 60.0f), [self headerTextStyleAttributes]);
-        CGSize lSize = ACMStringSize([labels valueForKey:@"Label"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), 60.0f), [self labelTextStyleAttributes]);
+        CGSize hSize = ACMStringSize([labels valueForKey:@"Header"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), 60.0f), [self headerTextStyleAttributesGivenSize:[[labels valueForKey:@"HeaderSize"] intValue]]);
+        CGSize lSize = ACMStringSize([labels valueForKey:@"Label"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), 60.0f), [self labelTextStyleAttributesGivenSize:[[labels valueForKey:@"HeaderSize"] intValue]]);
         
-        UILabel *header = nil;
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            
-            header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + headerLeftMargin,
-                                                               SCREEN_HEIGHT - 120.0f - lSize.height,
-                                                               SCREEN_WIDTH - (headerLeftMargin * 2),
-                                                               hSize.height + 5.0f)];
-            
-        } else {
-            
-            header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + headerLeftMargin,
-                                                                        SCREEN_HEIGHT - 120.0f - lSize.height,
-                                                                        SCREEN_WIDTH - (headerLeftMargin * 2),
-                                                                        hSize.height + 5.0f)];
-            
-        }
-
-        [header setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
+        NSLog(@"Frame > %@", NSStringFromCGRect(self.scrollview.frame));
+        
+        UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + ([[UIScreen mainScreen] bounds].size.width * index) + headerLeftMargin, [[UIScreen mainScreen] bounds].size.height - 120.0f - lSize.height, ([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), hSize.height + 5.0f)];
         [header setNumberOfLines:1];
-        [header setTag:index];
         [header setLineBreakMode:NSLineBreakByTruncatingTail];
-        [header setShadowOffset:CGSizeMake(1, 1)];
-        [header setShadowColor:[UIColor blackColor]];
+//        [header setShadowOffset:CGSizeMake(1, 1)];
+//        [header setShadowColor:[UIColor blackColor]];
         [header setText:[labels valueForKey:@"Header"]];
         [header setTextAlignment:NSTextAlignmentCenter];
         [header setBackgroundColor:[UIColor clearColor]];
-        [header setTextColor:headerColor];
-        [header setFont:[UIFont fontWithName:headerFontType size:headerFontSize]];
+        [header setTextColor:[UIColor colorWithHexString:[labels valueForKey:@"HeaderColor"]]];
+        [header setFont:[UIFont fontWithName:headerFontType size:[[labels valueForKey:@"HeaderSize"] intValue]]];
         [self.scrollview addSubview:header];
         
-        UILabel *label = nil;
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            
-            label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, (SCREEN_WIDTH - (labelLeftMargin * 2)), lSize.height)];
-            
-        } else {
-            
-            label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, (SCREEN_WIDTH - (labelLeftMargin * 2)), lSize.height)];
-            
-        }
-        
- 
-        [label setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + ([[UIScreen mainScreen] bounds].size.width * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, ([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), lSize.height)];
         [label setNumberOfLines:0];
-        [label setTag:index];
         [label setLineBreakMode:NSLineBreakByWordWrapping];
-        [label setShadowOffset:CGSizeMake(1, 1)];
-        [label setShadowColor:[UIColor blackColor]];
+//        [label setShadowOffset:CGSizeMake(1, 1)];
+//        [label setShadowColor:[UIColor blackColor]];
         [label setText:[labels valueForKey:@"Label"]];
         [label setTextAlignment:NSTextAlignmentCenter];
         [label setBackgroundColor:[UIColor clearColor]];
-        [label setTextColor:labelColor];
-        [label setFont:[UIFont fontWithName:labelFontType size:labelFontSize]];
+        [label setTextColor:[UIColor colorWithHexString:[labels valueForKey:@"LabelColor"]]];
+        [label setFont:[UIFont fontWithName:labelFontType size:[[labels valueForKey:@"LabelSize"] intValue]]];
         [self.scrollview addSubview:label];
         
         index++;
     }
 }
 
-- (void)defineLabelLayout
-{
-    [self.scrollview setContentSize:CGSizeMake(SCREEN_WIDTH * [self.backgroundImages count], SCREEN_HEIGHT)];
-    
-    for (UIView *v in [self.scrollview subviews])
-    {
-        if ([v isKindOfClass:[UILabel class]])
-        {
-            CGRect f = [v frame];
-            f.size.width = (SCREEN_WIDTH - (labelLeftMargin * 2));
-            f.origin.x = (SCREEN_WIDTH * [v tag]) + labelLeftMargin;
-            [v setFrame:f];
-        }
-    }
-    
-    [self.scrollview setContentOffset:CGPointMake(SCREEN_WIDTH * _index, self.scrollview.contentOffset.y)];
-}
-
 - (void)resetBackgroundImageState
 {
-    [self.backgroundTopImage setImage:[UIImage imageNamed:[self.backgroundImages objectAtIndex:_index]]];
+    [self.backgroundTopImage setImage:[self.backgroundImages objectAtIndex:_index]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AOTutorial Did Show Page" object:self userInfo:@{@"newPage":[NSNumber numberWithInt:_index]}];
     [self.backgroundTopImage setAlpha:1.0];
     [self.backgroundBottomImage setAlpha:0.0];
+    
+    [self.backDismissButton setAlpha:0.0];
+    [self.dismissButton setAlpha:1.0];
 }
 
 - (void)setHeaderImage:(UIImage *)logo
@@ -311,9 +250,30 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     [self setHeader:logo];
 }
 
+- (void)setHeaderVisible:(bool)isVisible {
+    
+    float targetAlpha = 1.0;
+    if (isVisible) {
+        targetAlpha = 0.0;
+        [self.logo setHidden:NO];
+    } else {
+        [self.logo setHidden:YES];
+    }
+    [UIView animateWithDuration:0.2
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.logo.alpha = targetAlpha;
+                     }
+                     completion:^(BOOL finished){
+                         [self.logo setHidden:isVisible];
+                     }];
+    
+}
+
 #pragma mark - Labels methods
 
-- (NSDictionary *)headerTextStyleAttributes
+- (NSDictionary *)headerTextStyleAttributesGivenSize:(int)fontSize
 {
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setAlignment:NSTextAlignmentCenter];
@@ -325,10 +285,10 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     shadow.shadowBlurRadius = 0.0;
     shadow.shadowOffset = CGSizeMake(1.0, 1.0);
     
-    return @{NSFontAttributeName:[UIFont fontWithName:headerFontType size:headerFontSize], NSForegroundColorAttributeName:headerColor, NSParagraphStyleAttributeName:style, NSShadowAttributeName:shadow};
+    return @{NSFontAttributeName:[UIFont fontWithName:headerFontType size:fontSize], NSForegroundColorAttributeName:headerColor, NSParagraphStyleAttributeName:style, NSShadowAttributeName:shadow};
 }
 
-- (NSDictionary *)labelTextStyleAttributes
+- (NSDictionary *)labelTextStyleAttributesGivenSize:(int)fontSize
 {
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setAlignment:NSTextAlignmentCenter];
@@ -340,7 +300,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     shadow.shadowBlurRadius = 0.0;
     shadow.shadowOffset = CGSizeMake(1.0, 1.0);
     
-    return @{NSFontAttributeName:[UIFont fontWithName:labelFontType size:labelFontSize], NSForegroundColorAttributeName:labelColor, NSParagraphStyleAttributeName:style, NSShadowAttributeName:shadow};
+    return @{NSFontAttributeName:[UIFont fontWithName:labelFontType size:fontSize], NSForegroundColorAttributeName:labelColor, NSParagraphStyleAttributeName:style, NSShadowAttributeName:shadow};
 }
 
 #pragma mark - User interface methods
@@ -364,16 +324,47 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat alpha = [scrollView contentOffset].x / SCREEN_WIDTH - _index;
+    
+    CGFloat alpha = [scrollView contentOffset].x / [[UIScreen mainScreen] bounds].size.width - _index;
     
     NSInteger newIndex = (alpha < 0 ? _index-1 : _index+1);
+    NSMutableArray *infoTopImage = [self.informationLabels objectAtIndex:_index];
+    NSMutableArray *infoBottomImage = nil;
+    if (newIndex < [self.informationLabels count]) {
+        infoBottomImage = [self.informationLabels objectAtIndex:newIndex];
+    } else {
+        infoBottomImage = infoTopImage;
+    }
+
+    [self.backDismissButton setTitleColor:[UIColor colorWithHexString:[infoBottomImage valueForKey:@"DismissColor"]] forState:UIControlStateNormal];
     
-    UIImage *nextImage = [UIImage imageNamed:[self.backgroundImages objectAtIndex:(newIndex < 0 ? 0 : (newIndex >= [self.backgroundImages count] ? [self.backgroundImages count]-1 : newIndex))]];
     
-    if (![[self.backgroundBottomImage image] isEqual:nextImage]) [self.backgroundBottomImage setImage:nextImage];
+    UIImage *nextImage = [self.backgroundImages objectAtIndex:(newIndex < 0 ? 0 : (newIndex >= [self.backgroundImages count] ? [self.backgroundImages count]-1 : newIndex))];
+    
+    if (![[self.backgroundBottomImage image] isEqual:nextImage]) {
+        [self.backgroundBottomImage setImage:nextImage];
+    }
      
     [self.backgroundTopImage setAlpha:1-fabs(alpha)];
     [self.backgroundBottomImage setAlpha:fabs(alpha)];
+    
+    NSDictionary *params = [_delegate pageWillChange:newIndex];
+    if ([[params objectForKey:@"headerVisible"] boolValue] == NO ) {
+        if ([self.logo alpha] != 0.0) {
+            [self.logo setAlpha:1-fabs(alpha)];
+        }
+    } else {
+        if ([self.logo alpha] != 1.0) {
+            [self.logo setAlpha:fabs(alpha)];
+        }
+    }
+    NSString *topDismissColorString = [infoTopImage valueForKey:@"DismissColor"];
+    NSString *bottomDismissColorString = [infoBottomImage valueForKey:@"DismissColor"];
+    
+    if ([topDismissColorString compare:bottomDismissColorString] != NSOrderedSame) {
+        [self.dismissButton setAlpha:1-fabs(alpha)];
+        [self.backDismissButton setAlpha:fabs(alpha)];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -382,8 +373,19 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     _index = floor((self.scrollview.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     
     [self.pageController setCurrentPage:_index];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"AOTutorial Will Show Page" object:self userInfo:@{@"newPage":[NSNumber numberWithInt:_index]}];
     [self resetBackgroundImageState];
+    NSDictionary *params = [_delegate pageWillChange:_index];
+    if ([[params objectForKey:@"headerVisible"] boolValue] == NO ) {
+            [self.logo setAlpha:0.0];
+    } else {
+            [self.logo setAlpha:1.0];
+    }
+    
+    NSMutableArray *infoTopImage = [self.informationLabels objectAtIndex:_index];
+    [self.dismissButton setTitleColor:[UIColor colorWithHexString:[infoTopImage valueForKey:@"DismissColor"]] forState:UIControlStateNormal];
+    [self.dismissButton setAlpha:1.0];
+    [self.backDismissButton setAlpha:0.0]; // Ready for next transition    
 }
 
 @end
