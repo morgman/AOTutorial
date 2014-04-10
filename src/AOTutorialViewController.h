@@ -15,9 +15,6 @@ enum  {
 };
 typedef NSUInteger AOTutorialButton;
 
-@protocol AOTutorialChangeDelegate;
-
-
 @interface AOTutorialViewController : UIViewController
 
 /**
@@ -52,9 +49,6 @@ typedef NSUInteger AOTutorialButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *dismissButton;
 @property (weak, nonatomic) IBOutlet UIButton *backDismissButton;
-
-@property (nonatomic, retain) id <AOTutorialChangeDelegate> delegate;
-
 
 /**
  * Custom init method to create a new AOTutorialController object
@@ -97,8 +91,4 @@ typedef NSUInteger AOTutorialButton;
 
 - (IBAction)dismiss:(id)sender;
 
-@end
-
-@protocol AOTutorialChangeDelegate
-- (NSDictionary *) pageWillChange:(int)newPage;
 @end

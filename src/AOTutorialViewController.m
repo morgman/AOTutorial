@@ -113,7 +113,6 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
             UIImage *anImage = [UIImage imageNamed:imageName];
             [self.backgroundImages addObject:anImage];
         }
-//        self.backgroundImages = [NSMutableArray arrayWithArray:images];
         self.informationLabels = [NSMutableArray arrayWithArray:informations];
     }
     return self;
@@ -148,7 +147,6 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     
     [self.backDismissButton setTitle:[[self.dismissButton titleLabel] text] forState:UIControlStateNormal];
 
-    
     [self layoutViews];
 }
 
@@ -209,8 +207,6 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         UILabel *header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + ([[UIScreen mainScreen] bounds].size.width * index) + headerLeftMargin, [[UIScreen mainScreen] bounds].size.height - 120.0f - lSize.height, ([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), hSize.height + 5.0f)];
         [header setNumberOfLines:1];
         [header setLineBreakMode:NSLineBreakByTruncatingTail];
-//        [header setShadowOffset:CGSizeMake(1, 1)];
-//        [header setShadowColor:[UIColor blackColor]];
         [header setText:[labels valueForKey:@"Header"]];
         [header setTextAlignment:NSTextAlignmentCenter];
         [header setBackgroundColor:[UIColor clearColor]];
@@ -221,8 +217,6 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + ([[UIScreen mainScreen] bounds].size.width * index) + labelLeftMargin, header.frame.origin.y + hSize.height + 5.0f, ([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), lSize.height)];
         [label setNumberOfLines:0];
         [label setLineBreakMode:NSLineBreakByWordWrapping];
-//        [label setShadowOffset:CGSizeMake(1, 1)];
-//        [label setShadowColor:[UIColor blackColor]];
         [label setText:[labels valueForKey:@"Label"]];
         [label setTextAlignment:NSTextAlignmentCenter];
         [label setBackgroundColor:[UIColor clearColor]];
@@ -237,7 +231,6 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 - (void)resetBackgroundImageState
 {
     [self.backgroundTopImage setImage:[self.backgroundImages objectAtIndex:_index]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AOTutorial Did Show Page" object:self userInfo:@{@"newPage":[NSNumber numberWithInt:_index]}];
     [self.backgroundTopImage setAlpha:1.0];
     [self.backgroundBottomImage setAlpha:0.0];
     
@@ -347,17 +340,24 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
      
     [self.backgroundTopImage setAlpha:1-fabs(alpha)];
     [self.backgroundBottomImage setAlpha:fabs(alpha)];
-    
-    NSDictionary *params = [_delegate pageWillChange:newIndex];
-    if ([[params objectForKey:@"headerVisible"] boolValue] == NO ) {
-        if ([self.logo alpha] != 0.0) {
-            [self.logo setAlpha:1-fabs(alpha)];
+        
+    bool topShowLogo = [[infoTopImage valueForKey:@"ShowLogo"] boolValue];
+    bool bottomShowLogo = [[infoBottomImage valueForKey:@"ShowLogo"] boolValue];
+    if (topShowLogo) {
+        if (!bottomShowLogo) {
+            if ([self.logo alpha] != 0.0) {
+                [self.logo setAlpha:1-fabs(alpha)];
+            }
         }
     } else {
-        if ([self.logo alpha] != 1.0) {
-            [self.logo setAlpha:fabs(alpha)];
+        if (bottomShowLogo) {
+            if ([self.logo alpha] != 1.0) {
+                [self.logo setAlpha:fabs(alpha)];
+            }
         }
     }
+    
+    
     NSString *topDismissColorString = [infoTopImage valueForKey:@"DismissColor"];
     NSString *bottomDismissColorString = [infoBottomImage valueForKey:@"DismissColor"];
     
@@ -373,16 +373,14 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     _index = floor((self.scrollview.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     
     [self.pageController setCurrentPage:_index];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"AOTutorial Will Show Page" object:self userInfo:@{@"newPage":[NSNumber numberWithInt:_index]}];
     [self resetBackgroundImageState];
-    NSDictionary *params = [_delegate pageWillChange:_index];
-    if ([[params objectForKey:@"headerVisible"] boolValue] == NO ) {
-            [self.logo setAlpha:0.0];
-    } else {
-            [self.logo setAlpha:1.0];
-    }
     
     NSMutableArray *infoTopImage = [self.informationLabels objectAtIndex:_index];
+    if ([[infoTopImage valueForKeyPath:@"ShowLogo"] boolValue]) {
+        [self.logo setAlpha:1.0];
+    } else {
+        [self.logo setAlpha:0.0];
+    }    
     [self.dismissButton setTitleColor:[UIColor colorWithHexString:[infoTopImage valueForKey:@"DismissColor"]] forState:UIControlStateNormal];
     [self.dismissButton setAlpha:1.0];
     [self.backDismissButton setAlpha:0.0]; // Ready for next transition    
