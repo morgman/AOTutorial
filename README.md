@@ -1,5 +1,29 @@
 #AOTutorial - Out of the box tutorial application
 
+Updated to include more detailed control of UIElements.
+
+Now .plist MUST contain the following additional keys for Labels:
+
+Header <preexisting>
+
+Label  <preexisting>
+
+HeaderColor  <new>
+
+HeaderSize   <new>
+
+LabelColor   <new>
+
+LabelSize    <new>
+
+DismissColor <new>
+
+ShowLogo     <new>
+
+I should probably add a fallback to defaults if these keys are not found, but that's not there yet.
+
+Background images are now cached so they are loaded once.
+
 AOTutorial is under MIT Licence so if you find it helpful just use it !
 
 ###**AOTutorialDemo**
