@@ -199,8 +199,15 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     NSUInteger index = 0;
     for (NSDictionary *labels in self.informationLabels)
     {
-        CGSize hSize = ACMStringSize([labels valueForKey:@"Header"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), 60.0f), [self headerTextStyleAttributesGivenSize:[[labels valueForKey:@"HeaderSize"] intValue]]);
-        CGSize lSize = ACMStringSize([labels valueForKey:@"Label"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), 60.0f), [self labelTextStyleAttributesGivenSize:[[labels valueForKey:@"HeaderSize"] intValue]]);
+        CGSize hSize;
+        CGSize lSize;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+            hSize = ACMStringSize([labels valueForKey:@"Header"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), 60.0f), [self headerTextStyleAttributesGivenSize:[[labels valueForKey:@"HeaderSize"] intValue]]);
+            lSize = ACMStringSize([labels valueForKey:@"Label"], CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), 60.0f), [self labelTextStyleAttributesGivenSize:[[labels valueForKey:@"HeaderSize"] intValue]]);
+        } else {
+            hSize = [[labels valueForKey:@"Header"] sizeWithFont:[UIFont systemFontOfSize:[[labels valueForKey:@"HeaderSize"] intValue]] constrainedToSize:CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (headerLeftMargin * 2)), 60.0f) lineBreakMode:NSLineBreakByWordWrapping];
+            lSize = [[labels valueForKey:@"Label"] sizeWithFont:[UIFont systemFontOfSize:[[labels valueForKey:@"HeaderSize"] intValue]] constrainedToSize:CGSizeMake(([[UIScreen mainScreen] bounds].size.width - (labelLeftMargin * 2)), 60.0f) lineBreakMode:NSLineBreakByWordWrapping];
+        }
         
         NSLog(@"Frame > %@", NSStringFromCGRect(self.scrollview.frame));
         
