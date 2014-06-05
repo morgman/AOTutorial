@@ -26,6 +26,8 @@
 #define signupLabelColor    @"#B80000"
 #define dismissLabelColor   @"#000000"
 
+#define _k_currentPageIndicatorTintAlpa 0.4
+
 
 @interface UIColor (AOAdditions)
 
@@ -47,6 +49,8 @@
 
 + (UIColor *)colorWithHexString:(NSString *)str;
 
++ (UIColor *)color:(UIColor*)sourceColor byChangingAlphaTo:(CGFloat)newAlpha;
+
 @end
 
 @implementation UIColor (AOAdditions)
@@ -63,6 +67,46 @@
     g = (col >> 8) & 0xFF;
     r = (col >> 16) & 0xFF;
     return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
+}
+
++ (UIColor *)color:(UIColor*)sourceColor byChangingAlphaTo:(CGFloat)newAlpha;
+{
+	// oldComponents is the array INSIDE the original color
+	// changing these changes the original, so we copy it
+	CGFloat *oldComponents = (CGFloat *)CGColorGetComponents([sourceColor CGColor]);
+	int numComponents = CGColorGetNumberOfComponents([sourceColor CGColor]);
+	CGFloat newComponents[4];
+    
+	switch (numComponents)
+	{
+		case 2:
+		{
+			//grayscale
+			newComponents[0] = oldComponents[0];
+			newComponents[1] = oldComponents[0];
+			newComponents[2] = oldComponents[0];
+			newComponents[3] = newAlpha;
+			break;
+		}
+		case 4:
+		{
+			//RGBA
+			newComponents[0] = oldComponents[0];
+			newComponents[1] = oldComponents[1];
+			newComponents[2] = oldComponents[2];
+			newComponents[3] = newAlpha;
+			break;
+		}
+	}
+    
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+	CGColorRef newColor = CGColorCreate(colorSpace, newComponents);
+	CGColorSpaceRelease(colorSpace);
+    
+	UIColor *retColor = [UIColor colorWithCGColor:newColor];
+	CGColorRelease(newColor);
+    
+	return retColor;
 }
 
 @end
@@ -138,11 +182,19 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     
     if (self.header)
     {
-        [self.logo setHidden:NO];
+        bool showInitialLogo = [[[self.informationLabels firstObject] valueForKey:@"ShowLogo"] boolValue];
+
+        [self.logo setHidden:!showInitialLogo];
         [self.logo setImage:self.header];
     }
     
     [self.pageController setNumberOfPages:[self.backgroundImages count]];
+    //    [self.backDismissButton setTitleColor:[UIColor colorWithHexString:[infoBottomImage valueForKey:@"DismissColor"]] forState:UIControlStateNormal];
+    UIColor *pageControllerColor = [UIColor colorWithHexString:[[self.informationLabels firstObject] valueForKey:@"DismissColor"]];
+    UIColor *currentPageControllerColor = [UIColor color:pageControllerColor byChangingAlphaTo:_k_currentPageIndicatorTintAlpa];
+    [self.pageController setPageIndicatorTintColor:pageControllerColor];
+    [self.pageController setCurrentPageIndicatorTintColor:currentPageControllerColor];
+    
     [self.scrollview setContentSize:CGSizeMake(self.scrollview.frame.size.width * [self.backgroundImages count], self.scrollview.frame.size.height)];
     
     [self.backDismissButton setTitle:[[self.dismissButton titleLabel] text] forState:UIControlStateNormal];
@@ -390,7 +442,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     }    
     [self.dismissButton setTitleColor:[UIColor colorWithHexString:[infoTopImage valueForKey:@"DismissColor"]] forState:UIControlStateNormal];
     [self.dismissButton setAlpha:1.0];
-    [self.backDismissButton setAlpha:0.0]; // Ready for next transition    
+    [self.backDismissButton setAlpha:0.0]; // Ready for next transition
+    
+    UIColor *pageControllerColor = [UIColor colorWithHexString:[infoTopImage valueForKey:@"DismissColor"]];
+    UIColor *currentPageControllerColor = [UIColor color:pageControllerColor byChangingAlphaTo:_k_currentPageIndicatorTintAlpa];
+    [self.pageController setPageIndicatorTintColor:pageControllerColor];
+    [self.pageController setCurrentPageIndicatorTintColor:currentPageControllerColor];
 }
 
 @end
