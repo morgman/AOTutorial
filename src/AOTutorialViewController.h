@@ -50,6 +50,9 @@ typedef NSUInteger AOTutorialButton;
 @property (weak, nonatomic) IBOutlet UIButton *dismissButton;
 @property (weak, nonatomic) IBOutlet UIButton *backDismissButton;
 
+@property (weak, nonatomic) IBOutlet UIView *topBackgroundView;
+@property (weak, nonatomic) IBOutlet UIView *bottomBackgroundView;
+
 /**
  * Custom init method to create a new AOTutorialController object
  *

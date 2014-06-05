@@ -129,6 +129,7 @@
 @end
 
 @implementation AOTutorialViewController
+@synthesize topBackgroundView, bottomBackgroundView;
 
 #pragma mark - Helper function
 
@@ -199,6 +200,10 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     
     [self.backDismissButton setTitle:[[self.dismissButton titleLabel] text] forState:UIControlStateNormal];
 
+    UIColor *initialBackgroundColor = [UIColor colorWithHexString:[[self.informationLabels firstObject] valueForKey:@"BackgroundColor"]];
+    [self.topBackgroundView setBackgroundColor:initialBackgroundColor];
+    [self.bottomBackgroundView setAlpha:0.0];  // Initially don't show it.
+    
     [self layoutViews];
 }
 
@@ -376,8 +381,9 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
-    CGFloat alpha = [scrollView contentOffset].x / [[UIScreen mainScreen] bounds].size.width - _index;
+    // [scrollView bounds] used to be: [[UIScreen mainScreen] bounds], but this screwed up the scrolling and alpha when the Tutorial screen
+    // was shown as only a portion of the mainscreen as when displayed on the iPad.
+    CGFloat alpha = [scrollView contentOffset].x / [scrollView bounds].size.width - _index;
     
     NSInteger newIndex = (alpha < 0 ? _index-1 : _index+1);
     NSMutableArray *infoTopImage = [self.informationLabels objectAtIndex:_index];
@@ -424,6 +430,14 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         [self.dismissButton setAlpha:1-fabs(alpha)];
         [self.backDismissButton setAlpha:fabs(alpha)];
     }
+    
+    UIColor *topBackgroundColor = [UIColor colorWithHexString:[infoTopImage valueForKey:@"BackgroundColor"]];
+    UIColor *bottomBackgroundColor = [UIColor colorWithHexString:[infoBottomImage valueForKey:@"BackgroundColor"]];
+    [self.bottomBackgroundView setBackgroundColor:bottomBackgroundColor];
+    if ([topBackgroundColor isEqual:bottomBackgroundColor] == NO) {
+        [self.topBackgroundView setAlpha:1-fabs(alpha)];
+        [self.bottomBackgroundView setAlpha:fabs(alpha)];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -443,6 +457,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     [self.dismissButton setTitleColor:[UIColor colorWithHexString:[infoTopImage valueForKey:@"DismissColor"]] forState:UIControlStateNormal];
     [self.dismissButton setAlpha:1.0];
     [self.backDismissButton setAlpha:0.0]; // Ready for next transition
+    
+    UIColor *backgroundColor = [UIColor colorWithHexString:[infoTopImage valueForKey:@"BackgroundColor"]];
+    [self.topBackgroundView setBackgroundColor:backgroundColor];
+    [self.topBackgroundView setAlpha:1.0];
+    [self.bottomBackgroundView setAlpha:0.0];
+
     
     UIColor *pageControllerColor = [UIColor colorWithHexString:[infoTopImage valueForKey:@"DismissColor"]];
     UIColor *currentPageControllerColor = [UIColor color:pageControllerColor byChangingAlphaTo:_k_currentPageIndicatorTintAlpa];
