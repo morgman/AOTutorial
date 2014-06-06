@@ -198,7 +198,10 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     
     [self.scrollview setContentSize:CGSizeMake(self.scrollview.frame.size.width * [self.backgroundImages count], self.scrollview.frame.size.height)];
     
-    [self.backDismissButton setTitle:[[self.dismissButton titleLabel] text] forState:UIControlStateNormal];
+    NSString *dismissButtonLabel = [[self.informationLabels firstObject] valueForKey:@"DismissButtonLabel"];
+    
+    [self.dismissButton setTitle:dismissButtonLabel forState:UIControlStateNormal];
+    [self.backDismissButton setTitle:dismissButtonLabel forState:UIControlStateNormal];
 
     UIColor *initialBackgroundColor = [UIColor colorWithHexString:[[self.informationLabels firstObject] valueForKey:@"BackgroundColor"]];
     [self.topBackgroundView setBackgroundColor:initialBackgroundColor];
@@ -453,7 +456,14 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         [self.logo setAlpha:1.0];
     } else {
         [self.logo setAlpha:0.0];
-    }    
+    }
+    
+    NSString *dismissButtonLabel = [infoTopImage valueForKey:@"DismissButtonLabel"];
+    
+    [self.dismissButton setTitle:dismissButtonLabel forState:UIControlStateNormal];
+    [self.backDismissButton setTitle:dismissButtonLabel forState:UIControlStateNormal];
+
+    
     [self.dismissButton setTitleColor:[UIColor colorWithHexString:[infoTopImage valueForKey:@"DismissColor"]] forState:UIControlStateNormal];
     [self.dismissButton setAlpha:1.0];
     [self.backDismissButton setAlpha:0.0]; // Ready for next transition
