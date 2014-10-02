@@ -24,7 +24,7 @@
 
 #define loginLabelColor     @"#000000"
 #define signupLabelColor    @"#B80000"
-#define dismissLabelColor   @"#000000"
+#define dismissLabelColor   @"#FFFFFF"
 
 #define _k_currentPageIndicatorTintAlpa 0.4
 
